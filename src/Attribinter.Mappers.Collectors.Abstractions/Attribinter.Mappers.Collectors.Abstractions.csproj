@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <RootNamespace>Attribinter.Mappers.Collectors</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Title>Attribinter.Mappers.Collectors.Abstractions</Title>
+        <Description>
+            Provides abstractions related to Attribinter mapping-collectors.
+        </Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Attribinter.Mappers.Collectors.Core\Attribinter.Mappers.Collectors.Core.csproj" />
+    </ItemGroup>
+
+</Project>
