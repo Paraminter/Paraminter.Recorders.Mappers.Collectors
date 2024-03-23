@@ -4,24 +4,25 @@ using Moq;
 
 using System.Collections.Generic;
 
-internal sealed class RepositoryContext<TParameter, TRecord, TData>
+internal sealed class RepositoryContext<TParameter, TParameterRepresentation, TRecord, TData>
 {
-    public static RepositoryContext<TParameter, TRecord, TData> Create()
+    public static RepositoryContext<TParameter, TParameterRepresentation, TRecord, TData> Create()
     {
         ParameterMappingRepositoryFactory nonGenericFactory = new();
 
-        var parameterComparer = Mock.Of<IEqualityComparer<TParameter>>();
+        var parameterRepresentationFactory = Mock.Of<IParameterRepresentationFactory<TParameter, TParameterRepresentation>>();
+        var parameterComparer = Mock.Of<IEqualityComparer<TParameterRepresentation>>();
 
-        var genericFactory = ((IParameterMappingRepositoryFactory)nonGenericFactory).ForParameter(parameterComparer);
+        var genericFactory = ((IParameterMappingRepositoryFactory)nonGenericFactory).ForParameter(parameterRepresentationFactory, parameterComparer);
 
         var repository = genericFactory.Create<TRecord, TData>();
 
         return new(repository);
     }
 
-    public IParameterMappingRepository<TParameter, TRecord, TData> Repository { get; }
+    public IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> Repository { get; }
 
-    public RepositoryContext(IParameterMappingRepository<TParameter, TRecord, TData> repository)
+    public RepositoryContext(IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> repository)
     {
         Repository = repository;
     }

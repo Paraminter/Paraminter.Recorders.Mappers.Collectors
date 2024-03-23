@@ -11,7 +11,7 @@ public sealed class Build
     [Fact]
     public void FirstBuild_ReturnsNotNull()
     {
-        var context = BuilderContext<object, object, object>.Create();
+        var context = BuilderContext<object, object, object, object>.Create();
 
         var actual = Target(context.Builder);
 
@@ -21,7 +21,7 @@ public sealed class Build
     [Fact]
     public void SecondBuild_ThrowsInvalidOperationException()
     {
-        var context = BuilderContext<object, object, object>.Create();
+        var context = BuilderContext<object, object, object, object>.Create();
 
         context.Builder.Build();
 

@@ -9,23 +9,31 @@ using Xunit;
 
 public sealed class ForParameter
 {
-    private IParameterMappingRepositoryFactory<TParameter> Target<TParameter>(IEqualityComparer<TParameter> parameterComparer) => Target(Context.Factory, parameterComparer);
-    private static IParameterMappingRepositoryFactory<TParameter> Target<TParameter>(IParameterMappingRepositoryFactory factory, IEqualityComparer<TParameter> parameterComparer) => factory.ForParameter(parameterComparer);
+    private IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation> Target<TParameter, TParameterRepresentation>(IParameterRepresentationFactory<TParameter, TParameterRepresentation> parameterRepresentationFactory, IEqualityComparer<TParameterRepresentation> parameterComparer) => Target(Context.Factory, parameterRepresentationFactory, parameterComparer);
+    private static IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation> Target<TParameter, TParameterRepresentation>(IParameterMappingRepositoryFactory factory, IParameterRepresentationFactory<TParameter, TParameterRepresentation> parameterRepresentationFactory, IEqualityComparer<TParameterRepresentation> parameterComparer) => factory.ForParameter(parameterRepresentationFactory, parameterComparer);
 
     private readonly FactoryContext Context = FactoryContext.Create();
 
     [Fact]
-    public void NullParameterComparer_ThrowsArgumentNullException()
+    public void NullParameterRepresentationFactory_ThrowsArgumentNullException()
     {
-        var exception = Record.Exception(() => Target<object>(null!));
+        var exception = Record.Exception(() => Target<object, object>(null!, Mock.Of<IEqualityComparer<object>>()));
 
         Assert.IsType<ArgumentNullException>(exception);
     }
 
     [Fact]
-    public void ValidParameteComparer_ReturnsNotNull()
+    public void NullParameterComparer_ThrowsArgumentNullException()
     {
-        var actual = Target(Mock.Of<IEqualityComparer<object>>());
+        var exception = Record.Exception(() => Target(Mock.Of<IParameterRepresentationFactory<object, object>>(), null!));
+
+        Assert.IsType<ArgumentNullException>(exception);
+    }
+
+    [Fact]
+    public void ValidArguments_ReturnsNotNull()
+    {
+        var actual = Target(Mock.Of<IParameterRepresentationFactory<object, object>>(), Mock.Of<IEqualityComparer<object>>());
 
         Assert.NotNull(actual);
     }
