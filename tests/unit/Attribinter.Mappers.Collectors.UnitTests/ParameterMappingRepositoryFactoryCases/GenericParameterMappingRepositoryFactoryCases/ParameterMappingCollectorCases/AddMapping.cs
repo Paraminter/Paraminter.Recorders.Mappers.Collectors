@@ -13,7 +13,7 @@ public sealed class AddMapping
     [Fact]
     public void NullParameter_ThrowsArgumentNullException()
     {
-        var context = CollectorContext<object, object, object>.Create();
+        var context = CollectorContext<object, object, object, object>.Create();
 
         var exception = Record.Exception(() => Target(context.Collector, null!, Mock.Of<IMappedArgumentRecorder<object, object>>()));
 
@@ -23,7 +23,7 @@ public sealed class AddMapping
     [Fact]
     public void NullRecorder_ThrowsArgumentNullException()
     {
-        var context = CollectorContext<object, object, object>.Create();
+        var context = CollectorContext<object, object, object, object>.Create();
 
         var exception = Record.Exception(() => Target(context.Collector, Mock.Of<object>(), null!));
 
@@ -33,7 +33,7 @@ public sealed class AddMapping
     [Fact]
     public void NotAlreadyExisting_ThrowsNoException()
     {
-        var context = CollectorContext<object, object, object>.Create();
+        var context = CollectorContext<object, object, object, object>.Create();
 
         var parameter = Mock.Of<object>();
 
@@ -49,7 +49,7 @@ public sealed class AddMapping
     [Fact]
     public void AlreadyExisting_ThrowsArgumentException()
     {
-        var context = CollectorContext<object, object, object>.Create();
+        var context = CollectorContext<object, object, object, object>.Create();
 
         var parameter1 = Mock.Of<object>();
         var parameter2 = Mock.Of<object>();
@@ -73,7 +73,7 @@ public sealed class AddMapping
     [Fact]
     public void AlreadyBuilt_ThrowsInvalidOperationException()
     {
-        var context = CollectorContext<object, object, object>.Create();
+        var context = CollectorContext<object, object, object, object>.Create();
 
         context.Repository.Builder.Build();
 
