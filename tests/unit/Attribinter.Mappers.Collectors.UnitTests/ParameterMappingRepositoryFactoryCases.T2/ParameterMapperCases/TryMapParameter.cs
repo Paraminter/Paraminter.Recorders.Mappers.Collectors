@@ -1,9 +1,8 @@
-﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.GenericParameterMappingRepositoryFactoryCases.ParameterMapperCases;
+﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.T2.ParameterMapperCases;
 
 using Moq;
 
 using System;
-using System.Collections.Generic;
 
 using Xunit;
 
@@ -40,12 +39,12 @@ public sealed class TryMapParameter
         context.ParameterRepresentationFactoryMock.Verify((factory) => factory.Create(parameter), Times.Once());
         context.ParameterRepresentationFactoryMock.VerifyNoOtherCalls();
 
-        context.ParameterComparerMock.Verify((comparer) => comparer.GetHashCode(mappedParameterRepresentation), Times.Once());
-        context.ParameterComparerMock.Verify((comparer) => comparer.GetHashCode(parameterRepresentation), Times.Once());
-        context.ParameterComparerMock.Verify((comparer) => comparer.Equals(mappedParameterRepresentation, parameterRepresentation), Times.Once());
-        context.ParameterComparerMock.VerifyNoOtherCalls();
+        context.ParameterRepresentationComparerMock.Verify((comparer) => comparer.GetHashCode(mappedParameterRepresentation), Times.Once());
+        context.ParameterRepresentationComparerMock.Verify((comparer) => comparer.GetHashCode(parameterRepresentation), Times.Once());
+        context.ParameterRepresentationComparerMock.Verify((comparer) => comparer.Equals(mappedParameterRepresentation, parameterRepresentation), Times.Once());
+        context.ParameterRepresentationComparerMock.VerifyNoOtherCalls();
 
-        static void setupParameterComparer(Mock<IEqualityComparer<object>> parameterComparer) => parameterComparer.Setup(static (comparer) => comparer.GetHashCode(It.IsAny<object>())).Returns(42);
+        static void setupParameterComparer(Mock<IParameterRepresentationEqualityComparer<object>> parameterComparer) => parameterComparer.Setup(static (comparer) => comparer.GetHashCode(It.IsAny<object>())).Returns(42);
 
         void registrator(IParameterMappingCollector<object, object, object> collector) => collector.AddMapping(mappedParameterRepresentation, Mock.Of<IMappedArgumentRecorder<object, object>>());
     }
@@ -64,7 +63,7 @@ public sealed class TryMapParameter
 
         context.ParameterRepresentationFactoryMock.Setup(static (factory) => factory.Create(It.IsAny<object>())).Returns(parameterRepresentation);
 
-        context.ParameterComparerMock.Setup(static (comparer) => comparer.Equals(It.IsAny<object>(), It.IsAny<object>())).Returns(true);
+        context.ParameterRepresentationComparerMock.Setup(static (comparer) => comparer.Equals(It.IsAny<object>(), It.IsAny<object>())).Returns(true);
 
         var actual = Target(context.Mapper, parameter);
 
@@ -73,12 +72,12 @@ public sealed class TryMapParameter
         context.ParameterRepresentationFactoryMock.Verify((factory) => factory.Create(parameter), Times.Once());
         context.ParameterRepresentationFactoryMock.VerifyNoOtherCalls();
 
-        context.ParameterComparerMock.Verify((comparer) => comparer.GetHashCode(mappedParameterRepresentation), Times.Once());
-        context.ParameterComparerMock.Verify((comparer) => comparer.GetHashCode(parameterRepresentation), Times.Once());
-        context.ParameterComparerMock.Verify((comparer) => comparer.Equals(mappedParameterRepresentation, parameterRepresentation), Times.Once());
-        context.ParameterComparerMock.VerifyNoOtherCalls();
+        context.ParameterRepresentationComparerMock.Verify((comparer) => comparer.GetHashCode(mappedParameterRepresentation), Times.Once());
+        context.ParameterRepresentationComparerMock.Verify((comparer) => comparer.GetHashCode(parameterRepresentation), Times.Once());
+        context.ParameterRepresentationComparerMock.Verify((comparer) => comparer.Equals(mappedParameterRepresentation, parameterRepresentation), Times.Once());
+        context.ParameterRepresentationComparerMock.VerifyNoOtherCalls();
 
-        static void setupParameterComparer(Mock<IEqualityComparer<object>> comparer) => comparer.Setup(static (comparer) => comparer.GetHashCode(It.IsAny<object>())).Returns(42);
+        static void setupParameterComparer(Mock<IParameterRepresentationEqualityComparer<object>> comparer) => comparer.Setup(static (comparer) => comparer.GetHashCode(It.IsAny<object>())).Returns(42);
 
         void registrator(IParameterMappingCollector<object, object, object> collector) => collector.AddMapping(mappedParameterRepresentation, recorder);
     }

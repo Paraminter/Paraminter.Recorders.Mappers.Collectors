@@ -17,8 +17,10 @@ public static class AttribinterMapperCollectorsServices
             throw new ArgumentNullException(nameof(services));
         }
 
-        services.AddSingleton<IParameterMappingRepositoryFactory, ParameterMappingRepositoryFactory>();
-        services.AddSingleton<IParameterMapperFactory, ParameterMapperFactory>();
+        services.AddTransient<IParameterMapperFactory, ParameterMapperFactory>();
+
+        services.AddTransient<IParameterMappingRepositoryFactory, ParameterMappingRepositoryFactory>();
+        services.AddTransient(typeof(IParameterMappingRepositoryFactory<,>), typeof(ParameterMappingRepositoryFactory<,>));
 
         return services;
     }

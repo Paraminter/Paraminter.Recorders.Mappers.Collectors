@@ -1,26 +1,18 @@
 ﻿namespace Attribinter.Mappers.Collectors.ParameterMapperFactoryCases;
 
-using Moq;
-
 internal sealed class FactoryContext
 {
     public static FactoryContext Create()
     {
-        Mock<IParameterMappingRepositoryFactory> repositoryFactoryMock = new() { DefaultValue = DefaultValue.Mock };
+        IParameterMapperFactory factory = new ParameterMapperFactory();
 
-        ParameterMapperFactory factory = new(repositoryFactoryMock.Object);
-
-        return new(factory, repositoryFactoryMock);
+        return new(factory);
     }
 
-    public ParameterMapperFactory Factory { get; }
+    public IParameterMapperFactory Factory { get; }
 
-    public Mock<IParameterMappingRepositoryFactory> RepositoryFactoryMock { get; }
-
-    private FactoryContext(ParameterMapperFactory factory, Mock<IParameterMappingRepositoryFactory> repositoryFactoryMock)
+    private FactoryContext(IParameterMapperFactory factory)
     {
         Factory = factory;
-
-        RepositoryFactoryMock = repositoryFactoryMock;
     }
 }

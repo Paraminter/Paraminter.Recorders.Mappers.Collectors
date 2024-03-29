@@ -1,4 +1,4 @@
-﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.GenericParameterMappingRepositoryFactoryCases.ParameterMappingCollectorCases;
+﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.T2.ParameterMappingCollectorCases;
 
 using Moq;
 
@@ -41,9 +41,9 @@ public sealed class AddMapping
 
         Assert.Null(exception);
 
-        context.ParameterComparerMock.Verify((comparer) => comparer.GetHashCode(parameter), Times.Once());
+        context.ParameterRepresentationComparerMock.Verify((comparer) => comparer.GetHashCode(parameter), Times.Once());
 
-        context.ParameterComparerMock.VerifyNoOtherCalls();
+        context.ParameterRepresentationComparerMock.VerifyNoOtherCalls();
     }
 
     [Fact]
@@ -54,8 +54,8 @@ public sealed class AddMapping
         var parameter1 = Mock.Of<object>();
         var parameter2 = Mock.Of<object>();
 
-        context.ParameterComparerMock.Setup(static (comparer) => comparer.Equals(It.IsAny<object>(), It.IsAny<object>())).Returns(true);
-        context.ParameterComparerMock.Setup(static (comparer) => comparer.GetHashCode(It.IsAny<object>())).Returns(42);
+        context.ParameterRepresentationComparerMock.Setup(static (comparer) => comparer.Equals(It.IsAny<object>(), It.IsAny<object>())).Returns(true);
+        context.ParameterRepresentationComparerMock.Setup(static (comparer) => comparer.GetHashCode(It.IsAny<object>())).Returns(42);
 
         context.Collector.AddMapping(parameter1, Mock.Of<IMappedArgumentRecorder<object, object>>());
 
@@ -63,11 +63,11 @@ public sealed class AddMapping
 
         Assert.IsType<ArgumentException>(exception);
 
-        context.ParameterComparerMock.Verify((comparer) => comparer.GetHashCode(parameter1), Times.Once());
-        context.ParameterComparerMock.Verify((comparer) => comparer.GetHashCode(parameter2), Times.Once());
-        context.ParameterComparerMock.Verify((comparer) => comparer.Equals(parameter1, parameter2), Times.Once());
+        context.ParameterRepresentationComparerMock.Verify((comparer) => comparer.GetHashCode(parameter1), Times.Once());
+        context.ParameterRepresentationComparerMock.Verify((comparer) => comparer.GetHashCode(parameter2), Times.Once());
+        context.ParameterRepresentationComparerMock.Verify((comparer) => comparer.Equals(parameter1, parameter2), Times.Once());
 
-        context.ParameterComparerMock.VerifyNoOtherCalls();
+        context.ParameterRepresentationComparerMock.VerifyNoOtherCalls();
     }
 
     [Fact]

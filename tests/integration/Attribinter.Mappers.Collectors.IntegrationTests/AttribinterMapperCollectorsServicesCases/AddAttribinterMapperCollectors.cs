@@ -13,17 +13,6 @@ public sealed class AddAttribinterMapperCollectors
 {
     private static IServiceCollection Target(IServiceCollection services) => AttribinterMapperCollectorsServices.AddAttribinterMapperCollectors(services);
 
-    private readonly IServiceProvider ServiceProvider;
-
-    public AddAttribinterMapperCollectors()
-    {
-        HostBuilder host = new();
-
-        host.ConfigureServices(static (services) => Target(services));
-
-        ServiceProvider = host.Build().Services;
-    }
-
     [Fact]
     public void NullServiceCollection_ArgumentNullException()
     {
@@ -43,16 +32,43 @@ public sealed class AddAttribinterMapperCollectors
     }
 
     [Fact]
-    public void IParameterMappingRepositoryFactory_ServiceCanBeResolved() => ServiceCanBeResolved<IParameterMappingRepositoryFactory>();
-
-    [Fact]
     public void IParameterMapperFactory_ServiceCanBeResolved() => ServiceCanBeResolved<IParameterMapperFactory>();
 
-    [AssertionMethod]
-    private void ServiceCanBeResolved<TService>() where TService : notnull
+    [Fact]
+    public void IParameterMappingRepositoryFactory_T0_ServiceCanBeResolved() => ServiceCanBeResolved<IParameterMappingRepositoryFactory>();
+
+    [Fact]
+    public void IParameterMappingRepositoryFactory_T2_RepresentationFactoryAndComparerAdded_ServiceCanBeResolved()
     {
-        var service = ServiceProvider.GetRequiredService<TService>();
+        ServiceCanBeResolved<IParameterMappingRepositoryFactory<object, object>>(additionalConfiguration);
+
+        static void additionalConfiguration(IServiceCollection services)
+        {
+            services.AddSingleton(Mock.Of<IParameterRepresentationFactory<object, object>>());
+            services.AddSingleton(Mock.Of<IParameterRepresentationEqualityComparer<object>>());
+        }
+    }
+
+    [AssertionMethod]
+    private static void ServiceCanBeResolved<TService>() where TService : notnull => ServiceCanBeResolved<TService>((_) => { });
+
+    [AssertionMethod]
+    private static void ServiceCanBeResolved<TService>(Action<IServiceCollection> additionalConfiguration) where TService : notnull
+    {
+        HostBuilder host = new();
+
+        host.ConfigureServices(configureServices);
+
+        var serviceProvider = host.Build().Services;
+
+        var service = serviceProvider.GetRequiredService<TService>();
 
         Assert.NotNull(service);
+
+        void configureServices(IServiceCollection services)
+        {
+            Target(services);
+            additionalConfiguration(services);
+        }
     }
 }
