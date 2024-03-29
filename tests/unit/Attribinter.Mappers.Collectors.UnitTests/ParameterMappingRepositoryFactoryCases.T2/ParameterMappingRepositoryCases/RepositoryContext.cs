@@ -1,21 +1,17 @@
-﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.GenericParameterMappingRepositoryFactoryCases.ParameterMappingRepositoryCases;
+﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.T2.ParameterMappingRepositoryCases;
 
 using Moq;
-
-using System.Collections.Generic;
 
 internal sealed class RepositoryContext<TParameter, TParameterRepresentation, TRecord, TData>
 {
     public static RepositoryContext<TParameter, TParameterRepresentation, TRecord, TData> Create()
     {
-        ParameterMappingRepositoryFactory nonGenericFactory = new();
+        IParameterMappingRepositoryFactory factory = new ParameterMappingRepositoryFactory();
 
         var parameterRepresentationFactory = Mock.Of<IParameterRepresentationFactory<TParameter, TParameterRepresentation>>();
-        var parameterComparer = Mock.Of<IEqualityComparer<TParameterRepresentation>>();
+        var parameterComparer = Mock.Of<IParameterRepresentationEqualityComparer<TParameterRepresentation>>();
 
-        var genericFactory = ((IParameterMappingRepositoryFactory)nonGenericFactory).ForParameter(parameterRepresentationFactory, parameterComparer);
-
-        var repository = genericFactory.Create<TRecord, TData>();
+        var repository = factory.WithParameterRepresentation(parameterRepresentationFactory, parameterComparer).Create<TRecord, TData>();
 
         return new(repository);
     }
