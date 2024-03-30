@@ -1,5 +1,7 @@
 ﻿namespace Attribinter.Mappers.Collectors;
 
+using Attribinter.Parameters.Representations;
+
 using System;
 using System.Collections.Generic;
 
@@ -7,20 +9,22 @@ using System.Collections.Generic;
 public sealed class ParameterMappingRepositoryFactory<TParameter, TParameterRepresentation> : IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation>
 {
     private readonly IParameterRepresentationFactory<TParameter, TParameterRepresentation> ParameterRepresentationFactory;
-    private readonly IParameterRepresentationEqualityComparer<TParameterRepresentation> ParameterRepresentationComparer;
 
     /// <summary>Instantiates a <see cref="ParameterMappingRepositoryFactory{TParameter, TParameterRepresentation}"/>, handling creation of <see cref="IParameterMappingRepository{TParameter, TParameterRepresentation, TRecord, TData}"/>.</summary>
     /// <param name="parameterRepresentationFactory">Handles creation of parameter representations.</param>
-    /// <param name="parameterRepresentationComparer">Determines equality when comparing parameter representations.</param>
-    public ParameterMappingRepositoryFactory(IParameterRepresentationFactory<TParameter, TParameterRepresentation> parameterRepresentationFactory, IParameterRepresentationEqualityComparer<TParameterRepresentation> parameterRepresentationComparer)
+    public ParameterMappingRepositoryFactory(IParameterRepresentationFactory<TParameter, TParameterRepresentation> parameterRepresentationFactory)
     {
         ParameterRepresentationFactory = parameterRepresentationFactory ?? throw new ArgumentNullException(nameof(parameterRepresentationFactory));
-        ParameterRepresentationComparer = parameterRepresentationComparer ?? throw new ArgumentNullException(nameof(parameterRepresentationComparer));
     }
 
-    IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation>.Create<TRecord, TData>()
+    IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation>.Create<TRecord, TData>(IParameterRepresentationEqualityComparer<TParameterRepresentation> parameterRepresentationComparer)
     {
-        Dictionary<TParameterRepresentation, IMappedArgumentRecorder<TRecord, TData>> mappings = new(ParameterRepresentationComparer);
+        if (parameterRepresentationComparer is null)
+        {
+            throw new ArgumentNullException(nameof(parameterRepresentationComparer));
+        }
+
+        Dictionary<TParameterRepresentation, IMappedArgumentRecorder<TRecord, TData>> mappings = new(parameterRepresentationComparer);
 
         ParameterMapper<TRecord, TData> mapper = new(ParameterRepresentationFactory, mappings);
         ParameterMappingCollector<TRecord, TData> collector = new(mapper);

@@ -1,5 +1,7 @@
 ﻿namespace Attribinter.Mappers.Collectors.AttribinterMapperCollectorsServicesCases;
 
+using Attribinter.Parameters.Representations;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -38,15 +40,11 @@ public sealed class AddAttribinterMapperCollectors
     public void IParameterMappingRepositoryFactory_T0_ServiceCanBeResolved() => ServiceCanBeResolved<IParameterMappingRepositoryFactory>();
 
     [Fact]
-    public void IParameterMappingRepositoryFactory_T2_RepresentationFactoryAndComparerAdded_ServiceCanBeResolved()
+    public void IParameterMappingRepositoryFactory_T2_RepresentationFactoryAdded_ServiceCanBeResolved()
     {
         ServiceCanBeResolved<IParameterMappingRepositoryFactory<object, object>>(additionalConfiguration);
 
-        static void additionalConfiguration(IServiceCollection services)
-        {
-            services.AddSingleton(Mock.Of<IParameterRepresentationFactory<object, object>>());
-            services.AddSingleton(Mock.Of<IParameterRepresentationEqualityComparer<object>>());
-        }
+        static void additionalConfiguration(IServiceCollection services) => services.AddSingleton(Mock.Of<IParameterRepresentationFactory<object, object>>());
     }
 
     [AssertionMethod]

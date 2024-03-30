@@ -1,5 +1,7 @@
 ﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.T2.ParameterMapperCases;
 
+using Attribinter.Parameters.Representations;
+
 using Moq;
 
 using System;
