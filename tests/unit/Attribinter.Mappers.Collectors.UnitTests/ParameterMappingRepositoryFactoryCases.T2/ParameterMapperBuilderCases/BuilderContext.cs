@@ -1,5 +1,7 @@
 ﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.T2.ParameterMapperBuilderCases;
 
+using Attribinter.Parameters.Representations;
+
 using Moq;
 
 internal sealed class BuilderContext<TParameter, TParameterRepresentation, TRecord, TData>
@@ -11,7 +13,7 @@ internal sealed class BuilderContext<TParameter, TParameterRepresentation, TReco
         var parameterRepresentationFactory = Mock.Of<IParameterRepresentationFactory<TParameter, TParameterRepresentation>>();
         var parameterRepresentationComparer = Mock.Of<IParameterRepresentationEqualityComparer<TParameterRepresentation>>();
 
-        var repository = factory.WithParameterRepresentation(parameterRepresentationFactory, parameterRepresentationComparer).Create<TRecord, TData>();
+        var repository = factory.WithParameterRepresentation(parameterRepresentationFactory).Create<TRecord, TData>(parameterRepresentationComparer);
 
         return new(repository.Builder);
     }

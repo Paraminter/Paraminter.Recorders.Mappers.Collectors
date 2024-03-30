@@ -1,5 +1,7 @@
 ﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.T2;
 
+using Attribinter.Parameters.Representations;
+
 using Moq;
 
 internal sealed class FactoryContext<TParameter, TParameterRepresentation>
@@ -9,9 +11,8 @@ internal sealed class FactoryContext<TParameter, TParameterRepresentation>
         IParameterMappingRepositoryFactory factory = new ParameterMappingRepositoryFactory();
 
         var parameterRepresentationFactory = Mock.Of<IParameterRepresentationFactory<TParameter, TParameterRepresentation>>();
-        var parameterRepresentationComparer = Mock.Of<IParameterRepresentationEqualityComparer<TParameterRepresentation>>();
 
-        var specificFactory = factory.WithParameterRepresentation(parameterRepresentationFactory, parameterRepresentationComparer);
+        var specificFactory = factory.WithParameterRepresentation(parameterRepresentationFactory);
 
         return new(specificFactory);
     }

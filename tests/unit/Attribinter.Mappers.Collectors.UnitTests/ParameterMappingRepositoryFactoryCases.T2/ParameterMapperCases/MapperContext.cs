@@ -1,5 +1,7 @@
 ﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.T2.ParameterMapperCases;
 
+using Attribinter.Parameters.Representations;
+
 using Moq;
 
 using System;
@@ -15,9 +17,7 @@ internal sealed class MapperContext<TParameter, TParameterRepresentation, TRecor
 
         parameterRepresentationComparerMockSetup(parameterRepresentationComparerMock);
 
-        var genericFactory = factory.WithParameterRepresentation(parameterRepresentationFactoryMock.Object, parameterRepresentationComparerMock.Object);
-
-        var repository = genericFactory.Create<TRecord, TData>();
+        var repository = factory.WithParameterRepresentation(parameterRepresentationFactoryMock.Object).Create<TRecord, TData>(parameterRepresentationComparerMock.Object);
 
         registrator(repository.Collector);
 
