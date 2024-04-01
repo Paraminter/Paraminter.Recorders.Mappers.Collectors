@@ -4,6 +4,8 @@ using Attribinter.Parameters.Representations;
 
 using Moq;
 
+using System.Collections.Generic;
+
 internal sealed class BuilderContext<TParameter, TParameterRepresentation, TRecord, TData>
 {
     public static BuilderContext<TParameter, TParameterRepresentation, TRecord, TData> Create()
@@ -11,7 +13,7 @@ internal sealed class BuilderContext<TParameter, TParameterRepresentation, TReco
         IParameterMappingRepositoryFactory factory = new ParameterMappingRepositoryFactory();
 
         var parameterRepresentationFactory = Mock.Of<IParameterRepresentationFactory<TParameter, TParameterRepresentation>>();
-        var parameterRepresentationComparer = Mock.Of<IParameterRepresentationEqualityComparer<TParameterRepresentation>>();
+        var parameterRepresentationComparer = Mock.Of<IEqualityComparer<TParameterRepresentation>>();
 
         var repository = factory.WithParameterRepresentation(parameterRepresentationFactory).Create<TRecord, TData>(parameterRepresentationComparer);
 

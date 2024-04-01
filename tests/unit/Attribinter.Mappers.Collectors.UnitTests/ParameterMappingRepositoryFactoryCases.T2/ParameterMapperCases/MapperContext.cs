@@ -5,15 +5,16 @@ using Attribinter.Parameters.Representations;
 using Moq;
 
 using System;
+using System.Collections.Generic;
 
 internal sealed class MapperContext<TParameter, TParameterRepresentation, TRecord, TData>
 {
-    public static MapperContext<TParameter, TParameterRepresentation, TRecord, TData> Create(Action<Mock<IParameterRepresentationEqualityComparer<TParameterRepresentation>>> parameterRepresentationComparerMockSetup, Action<IParameterMappingCollector<TParameterRepresentation, TRecord, TData>> registrator)
+    public static MapperContext<TParameter, TParameterRepresentation, TRecord, TData> Create(Action<Mock<IEqualityComparer<TParameterRepresentation>>> parameterRepresentationComparerMockSetup, Action<IParameterMappingCollector<TParameterRepresentation, TRecord, TData>> registrator)
     {
         IParameterMappingRepositoryFactory factory = new ParameterMappingRepositoryFactory();
 
         Mock<IParameterRepresentationFactory<TParameter, TParameterRepresentation>> parameterRepresentationFactoryMock = new() { DefaultValue = DefaultValue.Mock };
-        Mock<IParameterRepresentationEqualityComparer<TParameterRepresentation>> parameterRepresentationComparerMock = new();
+        Mock<IEqualityComparer<TParameterRepresentation>> parameterRepresentationComparerMock = new();
 
         parameterRepresentationComparerMockSetup(parameterRepresentationComparerMock);
 
@@ -29,9 +30,9 @@ internal sealed class MapperContext<TParameter, TParameterRepresentation, TRecor
     public IParameterMapper<TParameter, TRecord, TData> Mapper { get; }
 
     public Mock<IParameterRepresentationFactory<TParameter, TParameterRepresentation>> ParameterRepresentationFactoryMock { get; }
-    public Mock<IParameterRepresentationEqualityComparer<TParameterRepresentation>> ParameterRepresentationComparerMock { get; }
+    public Mock<IEqualityComparer<TParameterRepresentation>> ParameterRepresentationComparerMock { get; }
 
-    public MapperContext(IParameterMapper<TParameter, TRecord, TData> mapper, Mock<IParameterRepresentationFactory<TParameter, TParameterRepresentation>> parameterRepresentationFactoryMock, Mock<IParameterRepresentationEqualityComparer<TParameterRepresentation>> parameterRepresentationComparerMock)
+    public MapperContext(IParameterMapper<TParameter, TRecord, TData> mapper, Mock<IParameterRepresentationFactory<TParameter, TParameterRepresentation>> parameterRepresentationFactoryMock, Mock<IEqualityComparer<TParameterRepresentation>> parameterRepresentationComparerMock)
     {
         Mapper = mapper;
 

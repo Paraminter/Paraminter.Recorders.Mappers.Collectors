@@ -4,6 +4,8 @@ using Attribinter.Parameters.Representations;
 
 using Moq;
 
+using System.Collections.Generic;
+
 internal sealed class CollectorContext<TParameter, TParameterRepresentation, TRecord, TData>
 {
     public static CollectorContext<TParameter, TParameterRepresentation, TRecord, TData> Create()
@@ -11,7 +13,7 @@ internal sealed class CollectorContext<TParameter, TParameterRepresentation, TRe
         IParameterMappingRepositoryFactory factory = new ParameterMappingRepositoryFactory();
 
         Mock<IParameterRepresentationFactory<TParameter, TParameterRepresentation>> parameterRepresentationFactoryMock = new() { DefaultValue = DefaultValue.Mock };
-        Mock<IParameterRepresentationEqualityComparer<TParameterRepresentation>> parameterRepresentationComparerMock = new();
+        Mock<IEqualityComparer<TParameterRepresentation>> parameterRepresentationComparerMock = new();
 
         var repository = factory.WithParameterRepresentation(parameterRepresentationFactoryMock.Object).Create<TRecord, TData>(parameterRepresentationComparerMock.Object);
 
@@ -22,9 +24,9 @@ internal sealed class CollectorContext<TParameter, TParameterRepresentation, TRe
     public IParameterMappingCollector<TParameterRepresentation, TRecord, TData> Collector => Repository.Collector;
 
     public Mock<IParameterRepresentationFactory<TParameter, TParameterRepresentation>> ParameterRepresentationFactoryMock { get; }
-    public Mock<IParameterRepresentationEqualityComparer<TParameterRepresentation>> ParameterRepresentationComparerMock { get; }
+    public Mock<IEqualityComparer<TParameterRepresentation>> ParameterRepresentationComparerMock { get; }
 
-    public CollectorContext(IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> repository, Mock<IParameterRepresentationFactory<TParameter, TParameterRepresentation>> parameterRepresentationFactoryMock, Mock<IParameterRepresentationEqualityComparer<TParameterRepresentation>> parameterRepresentationComparerMock)
+    public CollectorContext(IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> repository, Mock<IParameterRepresentationFactory<TParameter, TParameterRepresentation>> parameterRepresentationFactoryMock, Mock<IEqualityComparer<TParameterRepresentation>> parameterRepresentationComparerMock)
     {
         Repository = repository;
 
