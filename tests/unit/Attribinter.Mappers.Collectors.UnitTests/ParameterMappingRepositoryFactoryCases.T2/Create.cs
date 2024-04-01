@@ -1,16 +1,15 @@
 ﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.T2;
 
-using Attribinter.Parameters.Representations;
-
 using Moq;
 
 using System;
+using System.Collections.Generic;
 
 using Xunit;
 
 public sealed class Create
 {
-    private static IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> Target<TParameter, TParameterRepresentation, TRecord, TData>(IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation> factory, IParameterRepresentationEqualityComparer<TParameterRepresentation> parameterRepresentationComparer) => factory.Create<TRecord, TData>(parameterRepresentationComparer);
+    private static IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> Target<TParameter, TParameterRepresentation, TRecord, TData>(IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation> factory, IEqualityComparer<TParameterRepresentation> parameterRepresentationComparer) => factory.Create<TRecord, TData>(parameterRepresentationComparer);
 
     [Fact]
     public void NullParameterRepresentationComparer_ThrowsArgumentNullException()
@@ -27,7 +26,7 @@ public sealed class Create
     {
         var context = FactoryContext<object, object>.Create();
 
-        var actual = Target<object, object, object, object>(context.Factory, Mock.Of<IParameterRepresentationEqualityComparer<object>>());
+        var actual = Target<object, object, object, object>(context.Factory, Mock.Of<IEqualityComparer<object>>());
 
         Assert.NotNull(actual);
     }

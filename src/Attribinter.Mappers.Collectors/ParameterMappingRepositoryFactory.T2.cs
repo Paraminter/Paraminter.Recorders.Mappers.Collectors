@@ -17,7 +17,7 @@ public sealed class ParameterMappingRepositoryFactory<TParameter, TParameterRepr
         ParameterRepresentationFactory = parameterRepresentationFactory ?? throw new ArgumentNullException(nameof(parameterRepresentationFactory));
     }
 
-    IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation>.Create<TRecord, TData>(IParameterRepresentationEqualityComparer<TParameterRepresentation> parameterRepresentationComparer)
+    IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation>.Create<TRecord, TData>(IEqualityComparer<TParameterRepresentation> parameterRepresentationComparer)
     {
         if (parameterRepresentationComparer is null)
         {
