@@ -20,7 +20,6 @@ public static class AttribinterMapperCollectorsServices
         services.AddTransient<IParameterMapperFactory, ParameterMapperFactory>();
 
         services.AddTransient<IParameterMappingRepositoryFactory, ParameterMappingRepositoryFactory>();
-        services.AddTransient(typeof(IParameterMappingRepositoryFactory<,>), typeof(ParameterMappingRepositoryFactory<,>));
 
         return services;
     }
