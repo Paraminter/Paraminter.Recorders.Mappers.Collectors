@@ -5,20 +5,19 @@ using Attribinter.Parameters.Representations;
 using System;
 using System.Collections.Generic;
 
-/// <inheritdoc cref="IParameterMappingRepositoryFactory{TParameter, TParameterRepresentation}"/>
-public sealed class ParameterMappingRepositoryFactory<TParameter, TParameterRepresentation> : IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation>
+/// <inheritdoc cref="IParameterMappingRepositoryFactory"/>
+public sealed class ParameterMappingRepositoryFactory : IParameterMappingRepositoryFactory
 {
-    private readonly IParameterRepresentationFactory<TParameter, TParameterRepresentation> ParameterRepresentationFactory;
+    /// <summary>Instantiates a <see cref="ParameterMappingRepositoryFactory"/>, handling creation of <see cref="IParameterMappingRepository{TParameter, TParameterRepresentation, TRecord, TData}"/>.</summary>
+    public ParameterMappingRepositoryFactory() { }
 
-    /// <summary>Instantiates a <see cref="ParameterMappingRepositoryFactory{TParameter, TParameterRepresentation}"/>, handling creation of <see cref="IParameterMappingRepository{TParameter, TParameterRepresentation, TRecord, TData}"/>.</summary>
-    /// <param name="parameterRepresentationFactory">Handles creation of parameter representations.</param>
-    public ParameterMappingRepositoryFactory(IParameterRepresentationFactory<TParameter, TParameterRepresentation> parameterRepresentationFactory)
+    IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> IParameterMappingRepositoryFactory.Create<TParameter, TParameterRepresentation, TRecord, TData>(IParameterRepresentationFactory<TParameter, TParameterRepresentation> parameterRepresentationFactory, IEqualityComparer<TParameterRepresentation> parameterRepresentationComparer)
     {
-        ParameterRepresentationFactory = parameterRepresentationFactory ?? throw new ArgumentNullException(nameof(parameterRepresentationFactory));
-    }
+        if (parameterRepresentationFactory is null)
+        {
+            throw new ArgumentNullException(nameof(parameterRepresentationFactory));
+        }
 
-    IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> IParameterMappingRepositoryFactory<TParameter, TParameterRepresentation>.Create<TRecord, TData>(IEqualityComparer<TParameterRepresentation> parameterRepresentationComparer)
-    {
         if (parameterRepresentationComparer is null)
         {
             throw new ArgumentNullException(nameof(parameterRepresentationComparer));
@@ -26,19 +25,19 @@ public sealed class ParameterMappingRepositoryFactory<TParameter, TParameterRepr
 
         Dictionary<TParameterRepresentation, IMappedArgumentRecorder<TRecord, TData>> mappings = new(parameterRepresentationComparer);
 
-        ParameterMapper<TRecord, TData> mapper = new(ParameterRepresentationFactory, mappings);
-        ParameterMappingCollector<TRecord, TData> collector = new(mapper);
-        ParameterMapperBuilder<TRecord, TData> builder = new(collector);
+        ParameterMapper<TParameter, TParameterRepresentation, TRecord, TData> mapper = new(parameterRepresentationFactory, mappings);
+        ParameterMappingCollector<TParameter, TParameterRepresentation, TRecord, TData> collector = new(mapper);
+        ParameterMapperBuilder<TParameter, TParameterRepresentation, TRecord, TData> builder = new(collector);
 
-        return new ParameterMappingRepository<TRecord, TData>(builder, collector);
+        return new ParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData>(builder, collector);
     }
 
-    private sealed class ParameterMappingRepository<TRecord, TData> : IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData>
+    private sealed class ParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData> : IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData>
     {
-        private readonly ParameterMapperBuilder<TRecord, TData> Builder;
-        private readonly ParameterMappingCollector<TRecord, TData> Collector;
+        private readonly ParameterMapperBuilder<TParameter, TParameterRepresentation, TRecord, TData> Builder;
+        private readonly ParameterMappingCollector<TParameter, TParameterRepresentation, TRecord, TData> Collector;
 
-        public ParameterMappingRepository(ParameterMapperBuilder<TRecord, TData> builder, ParameterMappingCollector<TRecord, TData> collector)
+        public ParameterMappingRepository(ParameterMapperBuilder<TParameter, TParameterRepresentation, TRecord, TData> builder, ParameterMappingCollector<TParameter, TParameterRepresentation, TRecord, TData> collector)
         {
             Builder = builder;
             Collector = collector;
@@ -48,13 +47,13 @@ public sealed class ParameterMappingRepositoryFactory<TParameter, TParameterRepr
         IParameterMappingCollector<TParameterRepresentation, TRecord, TData> IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TData>.Collector => Collector;
     }
 
-    private sealed class ParameterMapperBuilder<TRecord, TData> : IParameterMapperBuilder<TParameter, TRecord, TData>
+    private sealed class ParameterMapperBuilder<TParameter, TParameterRepresentation, TRecord, TData> : IParameterMapperBuilder<TParameter, TRecord, TData>
     {
-        private readonly ParameterMappingCollector<TRecord, TData> Collector;
+        private readonly ParameterMappingCollector<TParameter, TParameterRepresentation, TRecord, TData> Collector;
 
         private bool HasBeenBuilt;
 
-        public ParameterMapperBuilder(ParameterMappingCollector<TRecord, TData> collector)
+        public ParameterMapperBuilder(ParameterMappingCollector<TParameter, TParameterRepresentation, TRecord, TData> collector)
         {
             Collector = collector;
         }
@@ -72,13 +71,13 @@ public sealed class ParameterMappingRepositoryFactory<TParameter, TParameterRepr
         }
     }
 
-    private sealed class ParameterMappingCollector<TRecord, TData> : IParameterMappingCollector<TParameterRepresentation, TRecord, TData>
+    private sealed class ParameterMappingCollector<TParameter, TParameterRepresentation, TRecord, TData> : IParameterMappingCollector<TParameterRepresentation, TRecord, TData>
     {
-        private readonly ParameterMapper<TRecord, TData> Mapper;
+        private readonly ParameterMapper<TParameter, TParameterRepresentation, TRecord, TData> Mapper;
 
         private bool HasBeenFinalized;
 
-        public ParameterMappingCollector(ParameterMapper<TRecord, TData> mapper)
+        public ParameterMappingCollector(ParameterMapper<TParameter, TParameterRepresentation, TRecord, TData> mapper)
         {
             Mapper = mapper;
         }
@@ -111,7 +110,7 @@ public sealed class ParameterMappingRepositoryFactory<TParameter, TParameterRepr
         }
     }
 
-    private sealed class ParameterMapper<TRecord, TData> : IParameterMapper<TParameter, TRecord, TData>
+    private sealed class ParameterMapper<TParameter, TParameterRepresentation, TRecord, TData> : IParameterMapper<TParameter, TRecord, TData>
     {
         private readonly IParameterRepresentationFactory<TParameter, TParameterRepresentation> ParameterRepresentationFactory;
         private readonly IDictionary<TParameterRepresentation, IMappedArgumentRecorder<TRecord, TData>> Mappings;
