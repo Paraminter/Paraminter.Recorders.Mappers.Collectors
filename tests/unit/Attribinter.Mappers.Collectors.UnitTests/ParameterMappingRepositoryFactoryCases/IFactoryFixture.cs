@@ -1,4 +1,4 @@
-namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases;
+﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases;
 
 internal interface IFactoryFixture
 {

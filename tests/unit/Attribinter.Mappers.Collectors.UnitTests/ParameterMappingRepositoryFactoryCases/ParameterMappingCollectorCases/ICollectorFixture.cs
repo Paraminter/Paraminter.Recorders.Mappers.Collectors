@@ -1,4 +1,4 @@
-namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.ParameterMappingCollectorCases;
+﻿namespace Attribinter.Mappers.Collectors.ParameterMappingRepositoryFactoryCases.ParameterMappingCollectorCases;
 
 using Attribinter.Parameters.Representations;
 
