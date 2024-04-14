@@ -8,7 +8,7 @@
     <PropertyGroup>
         <Title>Attribinter.Mappers.Collectors.DependencyInjection</Title>
         <Description>
-            Allows the services provided by Attribinter.Mappers.Collectors to be registered with DI-containers.
+            Allows the services provided by Attribinter.Mappers.Collectors to be registered with .NET DI-containers.
         </Description>
     </PropertyGroup>
 

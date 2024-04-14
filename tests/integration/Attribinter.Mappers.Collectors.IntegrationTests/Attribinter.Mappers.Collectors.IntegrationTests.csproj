@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <RootNamespace>Attribinter.Mappers.Collecotrs</RootNamespace>
+        <RootNamespace>Attribinter.Mappers.Collectors</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

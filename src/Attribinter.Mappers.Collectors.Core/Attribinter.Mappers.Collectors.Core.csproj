@@ -8,12 +8,12 @@
     <PropertyGroup>
         <Title>Attribinter.Mappers.Collectors.Core</Title>
         <Description>
-            Provides the core definitions of Attribinter mapping-collectors.
+            Defines the core components of Attribinter mapping-collectors.
         </Description>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Attribinter.Mappers" />
+        <PackageReference Include="Attribinter.Mappers.Core" />
     </ItemGroup>
 
 </Project>
