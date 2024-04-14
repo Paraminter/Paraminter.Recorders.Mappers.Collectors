@@ -16,7 +16,7 @@
 
     <ItemGroup>
         <PackageVersion Include="Attribinter.Logo" Version="1.0.3" />
-        <PackageVersion Include="Attribinter.Mappers" Version="7.0.0-alpha.39" />
+        <PackageVersion Include="Attribinter.Mappers.Core" Version="8.0.0-alpha.8" />
         <PackageVersion Include="Attribinter.Parameters.Representations.Abstractions" Version="8.0.0-alpha.4" /> 
         <PackageVersion Include="Attribinter.Tests.Common" Version="8.0.0-alpha.9" />
     </ItemGroup>
