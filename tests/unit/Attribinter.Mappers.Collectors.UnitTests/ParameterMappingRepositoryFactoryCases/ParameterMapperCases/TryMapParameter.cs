@@ -31,7 +31,7 @@ public sealed class TryMapParameter
 
         var fixture = MapperFixtureFactory.Create<object, object, object, object>((_) => { }, setupParameterComparer, registrator);
 
-        fixture.ParameterRepresentationFactoryMock.Setup(static (factory) => factory.Create(It.IsAny<object>())).Returns(parameterRepresentation);
+        fixture.ParameterRepresentationFactoryMock.Setup((factory) => factory.Create(parameter)).Returns(parameterRepresentation);
 
         var result = Target(fixture, parameter);
 
@@ -54,7 +54,7 @@ public sealed class TryMapParameter
 
         var fixture = MapperFixtureFactory.Create<object, object, object, object>((_) => { }, setupParameterComparer, registrator);
 
-        fixture.ParameterRepresentationFactoryMock.Setup(static (factory) => factory.Create(It.IsAny<object>())).Returns(parameterRepresentation);
+        fixture.ParameterRepresentationFactoryMock.Setup((factory) => factory.Create(parameter)).Returns(parameterRepresentation);
 
         fixture.ParameterRepresentationComparerMock.Setup(static (comparer) => comparer.Equals(It.IsAny<object>(), It.IsAny<object>())).Returns(true);
 
