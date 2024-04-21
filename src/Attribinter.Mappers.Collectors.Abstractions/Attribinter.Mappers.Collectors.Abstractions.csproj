@@ -2,21 +2,16 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <RootNamespace>Attribinter.Mappers.Collectors</RootNamespace>
-    </PropertyGroup>
 
-    <PropertyGroup>
+        <RootNamespace>Attribinter.Mappers.Collectors</RootNamespace>
+
         <Title>Attribinter.Mappers.Collectors.Abstractions</Title>
-        <Description>
-            Provides abstractions related to Attribinter mapping-collectors.
-        </Description>
+        <Description>Provides abstractions related to Attribinter mapping-collectors.</Description>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Attribinter.Parameters.Representations.Abstractions" />
-    </ItemGroup>
 
-    <ItemGroup>
         <ProjectReference Include="..\Attribinter.Mappers.Collectors.Core\Attribinter.Mappers.Collectors.Core.csproj" />
     </ItemGroup>
 
