@@ -19,4 +19,14 @@ public sealed class Build
 
         Assert.IsType<InvalidOperationException>(result);
     }
+
+    [Fact]
+    public void FirstBuild_ReturnsMapper()
+    {
+        var fixture = BuilderFixtureFactory.Create<object, object, object, object>();
+
+        var result = Target(fixture);
+
+        Assert.NotNull(result);
+    }
 }

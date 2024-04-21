@@ -59,4 +59,14 @@ public sealed class AddMapping
 
         Assert.IsType<InvalidOperationException>(result);
     }
+
+    [Fact]
+    public void NotExistingAndFirstBuild_ThrowsNoException()
+    {
+        var fixture = CollectorFixtureFactory.Create<object, object, object, object>();
+
+        var result = Record.Exception(() => Target(fixture, Mock.Of<object>(), Mock.Of<IMappedArgumentRecorder<object, object>>()));
+
+        Assert.Null(result);
+    }
 }
