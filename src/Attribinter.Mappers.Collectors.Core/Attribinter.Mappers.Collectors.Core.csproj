@@ -2,14 +2,11 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <RootNamespace>Attribinter.Mappers.Collectors</RootNamespace>
-    </PropertyGroup>
 
-    <PropertyGroup>
+        <RootNamespace>Attribinter.Mappers.Collectors</RootNamespace>
+
         <Title>Attribinter.Mappers.Collectors.Core</Title>
-        <Description>
-            Defines the core components of Attribinter mapping-collectors.
-        </Description>
+        <Description>Defines the core components of Attribinter mapping-collectors.</Description>
     </PropertyGroup>
 
     <ItemGroup>
