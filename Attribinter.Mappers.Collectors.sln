@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{308AC385-5929-4E9E-8C93-F89589695CC1}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		tests\.editorconfig = tests\.editorconfig
 		Directory.Build.props = Directory.Build.props
 		src\Directory.Build.props = src\Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
@@ -17,11 +18,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attribinter.Mappers.Collect
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attribinter.Mappers.Collectors", "src\Attribinter.Mappers.Collectors\Attribinter.Mappers.Collectors.csproj", "{8C4B67CE-EEDE-4C97-B720-5B3880E7DD46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attribinter.Mappers.Collectors.DependencyInjection", "src\Attribinter.Mappers.Collectors.DependencyInjection\Attribinter.Mappers.Collectors.DependencyInjection.csproj", "{17CA696F-D1BA-4CA8-B173-0926E4CE4613}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attribinter.Mappers.Collectors.DependencyInjection", "src\Attribinter.Mappers.Collectors.DependencyInjection\Attribinter.Mappers.Collectors.DependencyInjection.csproj", "{17CA696F-D1BA-4CA8-B173-0926E4CE4613}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attribinter.Mappers.Collectors.IntegrationTests", "tests\integration\Attribinter.Mappers.Collectors.IntegrationTests\Attribinter.Mappers.Collectors.IntegrationTests.csproj", "{767385CE-95A3-49EE-B75B-1151ED808D14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attribinter.Mappers.Collectors.IntegrationTests", "tests\integration\Attribinter.Mappers.Collectors.IntegrationTests\Attribinter.Mappers.Collectors.IntegrationTests.csproj", "{767385CE-95A3-49EE-B75B-1151ED808D14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attribinter.Mappers.Collectors.UnitTests", "tests\unit\Attribinter.Mappers.Collectors.UnitTests\Attribinter.Mappers.Collectors.UnitTests.csproj", "{63E38920-FCE0-4073-93AC-87EF2FB9CC00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attribinter.Mappers.Collectors.UnitTests", "tests\unit\Attribinter.Mappers.Collectors.UnitTests\Attribinter.Mappers.Collectors.UnitTests.csproj", "{63E38920-FCE0-4073-93AC-87EF2FB9CC00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
