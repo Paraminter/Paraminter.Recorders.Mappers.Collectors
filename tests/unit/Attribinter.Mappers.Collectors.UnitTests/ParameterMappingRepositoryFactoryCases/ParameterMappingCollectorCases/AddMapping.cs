@@ -8,8 +8,6 @@ using Xunit;
 
 public sealed class AddMapping
 {
-    private static void Target<TParameter, TParameterRepresentation, TRecord, TData>(ICollectorFixture<TParameter, TParameterRepresentation, TRecord, TData> fixture, TParameterRepresentation parameter, IMappedArgumentRecorder<TRecord, TData> recorder) => fixture.Sut.AddMapping(parameter, recorder);
-
     [Fact]
     public void NullParameter_ThrowsArgumentNullException()
     {
@@ -69,4 +67,6 @@ public sealed class AddMapping
 
         Assert.Null(result);
     }
+
+    private static void Target<TParameter, TParameterRepresentation, TRecord, TData>(ICollectorFixture<TParameter, TParameterRepresentation, TRecord, TData> fixture, TParameterRepresentation parameter, IMappedArgumentRecorder<TRecord, TData> recorder) => fixture.Sut.AddMapping(parameter, recorder);
 }

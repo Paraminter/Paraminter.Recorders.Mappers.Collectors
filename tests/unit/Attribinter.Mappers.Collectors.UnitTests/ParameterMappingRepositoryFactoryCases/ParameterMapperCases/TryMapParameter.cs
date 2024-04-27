@@ -9,8 +9,6 @@ using Xunit;
 
 public sealed class TryMapParameter
 {
-    private static IMappedArgumentRecorder<TRecord, TData>? Target<TParameter, TParameterRepresentation, TRecord, TData>(IMapperFixture<TParameter, TParameterRepresentation, TRecord, TData> fixture, TParameter parameter) => fixture.Sut.TryMapParameter(parameter);
-
     [Fact]
     public void NullParameter_ThrowsArgumentNullException()
     {
@@ -66,4 +64,6 @@ public sealed class TryMapParameter
 
         void registrator(IParameterMappingCollector<object, object, object> collector) => collector.AddMapping(mappedParameterRepresentation, recorder);
     }
+
+    private static IMappedArgumentRecorder<TRecord, TData>? Target<TParameter, TParameterRepresentation, TRecord, TData>(IMapperFixture<TParameter, TParameterRepresentation, TRecord, TData> fixture, TParameter parameter) => fixture.Sut.TryMapParameter(parameter);
 }
