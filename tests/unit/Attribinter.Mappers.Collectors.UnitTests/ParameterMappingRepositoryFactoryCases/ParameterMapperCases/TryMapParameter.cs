@@ -9,8 +9,6 @@ using Xunit;
 
 public sealed class TryMapParameter
 {
-    private static IMappedArgumentRecorder<TRecord, TData>? Target<TParameter, TParameterRepresentation, TRecord, TData>(IMapperFixture<TParameter, TParameterRepresentation, TRecord, TData> fixture, TParameter parameter) => fixture.Sut.TryMapParameter(parameter);
-
     [Fact]
     public void NullParameter_ThrowsArgumentNullException()
     {
@@ -31,7 +29,7 @@ public sealed class TryMapParameter
 
         var fixture = MapperFixtureFactory.Create<object, object, object, object>((_) => { }, setupParameterComparer, registrator);
 
-        fixture.ParameterRepresentationFactoryMock.Setup(static (factory) => factory.Create(It.IsAny<object>())).Returns(parameterRepresentation);
+        fixture.ParameterRepresentationFactoryMock.Setup((factory) => factory.Create(parameter)).Returns(parameterRepresentation);
 
         var result = Target(fixture, parameter);
 
@@ -54,7 +52,7 @@ public sealed class TryMapParameter
 
         var fixture = MapperFixtureFactory.Create<object, object, object, object>((_) => { }, setupParameterComparer, registrator);
 
-        fixture.ParameterRepresentationFactoryMock.Setup(static (factory) => factory.Create(It.IsAny<object>())).Returns(parameterRepresentation);
+        fixture.ParameterRepresentationFactoryMock.Setup((factory) => factory.Create(parameter)).Returns(parameterRepresentation);
 
         fixture.ParameterRepresentationComparerMock.Setup(static (comparer) => comparer.Equals(It.IsAny<object>(), It.IsAny<object>())).Returns(true);
 
@@ -66,4 +64,6 @@ public sealed class TryMapParameter
 
         void registrator(IParameterMappingCollector<object, object, object> collector) => collector.AddMapping(mappedParameterRepresentation, recorder);
     }
+
+    private static IMappedArgumentRecorder<TRecord, TData>? Target<TParameter, TParameterRepresentation, TRecord, TData>(IMapperFixture<TParameter, TParameterRepresentation, TRecord, TData> fixture, TParameter parameter) => fixture.Sut.TryMapParameter(parameter);
 }

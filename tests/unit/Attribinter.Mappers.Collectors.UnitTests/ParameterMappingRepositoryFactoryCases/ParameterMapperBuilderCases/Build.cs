@@ -6,8 +6,6 @@ using Xunit;
 
 public sealed class Build
 {
-    private static IParameterMapper<TParameter, TRecord, TData> Target<TParameter, TParameterRepresentation, TRecord, TData>(IBuilderFixture<TParameter, TParameterRepresentation, TRecord, TData> fixture) => fixture.Sut.Build();
-
     [Fact]
     public void MultipleBuilds_ThrowsInvalidOperationException()
     {
@@ -19,4 +17,16 @@ public sealed class Build
 
         Assert.IsType<InvalidOperationException>(result);
     }
+
+    [Fact]
+    public void FirstBuild_ReturnsMapper()
+    {
+        var fixture = BuilderFixtureFactory.Create<object, object, object, object>();
+
+        var result = Target(fixture);
+
+        Assert.NotNull(result);
+    }
+
+    private static IParameterMapper<TParameter, TRecord, TData> Target<TParameter, TParameterRepresentation, TRecord, TData>(IBuilderFixture<TParameter, TParameterRepresentation, TRecord, TData> fixture) => fixture.Sut.Build();
 }

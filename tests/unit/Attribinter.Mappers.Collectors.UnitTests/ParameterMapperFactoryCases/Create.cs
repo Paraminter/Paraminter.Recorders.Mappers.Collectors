@@ -32,14 +32,11 @@ public sealed class Create
     public void ValidArguments_ReturnsMapper()
     {
         var mapper = Mock.Of<IParameterMapper<object, object, object>>();
-        var collector = Mock.Of<IParameterMappingCollector<object, object, object>>();
-        Mock<IParameterMappingRepository<object, object, object, object>> repositoryMock = new() { DefaultValue = DefaultValue.Mock };
-        Mock<IParameterMappingRegistrator<object, object, object>> registratorMock = new();
+        Mock<IParameterMappingRepository<object, object, object, object>> repositoryMock = new();
 
         repositoryMock.Setup(static (repository) => repository.Builder.Build()).Returns(mapper);
-        repositoryMock.Setup(static (repository) => repository.Collector).Returns(collector);
 
-        var result = Target(repositoryMock.Object, registratorMock.Object);
+        var result = Target(repositoryMock.Object, Mock.Of<IParameterMappingRegistrator<object, object, object>>());
 
         Assert.Same(mapper, result);
     }

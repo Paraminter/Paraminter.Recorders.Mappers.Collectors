@@ -30,4 +30,12 @@ public sealed class Create
 
         Assert.IsType<ArgumentNullException>(result);
     }
+
+    [Fact]
+    public void ValidArguments_ReturnsRepository()
+    {
+        var result = Target<object, object, object, object>(Mock.Of<IParameterRepresentationFactory<object, object>>(), Mock.Of<IEqualityComparer<object>>());
+
+        Assert.NotNull(result);
+    }
 }

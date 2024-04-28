@@ -4,9 +4,9 @@ internal static class FactoryFixtureFactory
 {
     public static IFactoryFixture Create()
     {
-        IParameterMappingRepositoryFactory factory = new ParameterMappingRepositoryFactory();
+        IParameterMappingRepositoryFactory sut = new ParameterMappingRepositoryFactory();
 
-        return new FactoryFixture(factory);
+        return new FactoryFixture(sut);
     }
 
     private sealed class FactoryFixture : IFactoryFixture
