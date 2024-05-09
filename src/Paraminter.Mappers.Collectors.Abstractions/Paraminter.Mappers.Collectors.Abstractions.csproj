@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+
+        <RootNamespace>Paraminter.Mappers.Collectors</RootNamespace>
+
+        <Title>Paraminter.Mappers.Collectors.Abstractions</Title>
+        <Description>Provides abstractions related to Paraminter mapping-collectors.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Paraminter.Parameters.Representations.Abstractions" />
+
+        <ProjectReference Include="..\Paraminter.Mappers.Collectors.Core\Paraminter.Mappers.Collectors.Core.csproj" />
+    </ItemGroup>
+
+</Project>
