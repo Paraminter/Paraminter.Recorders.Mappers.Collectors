@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+
+        <RootNamespace>Paraminter.Mappers.Collectors</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+
+        <PackageReference Include="Moq" />
+
+        <PackageReference Include="Paraminter.Tests.Common" />
+
+        <PackageReference Include="xunit" />
+        <PackageReference Include="xunit.runner.visualstudio" />
+
+        <ProjectReference Include="..\..\..\src\Paraminter.Mappers.Collectors.Abstractions\Paraminter.Mappers.Collectors.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\src\Paraminter.Mappers.Collectors.Core\Paraminter.Mappers.Collectors.Core.csproj" />
+        <ProjectReference Include="..\..\..\src\Paraminter.Mappers.Collectors\Paraminter.Mappers.Collectors.csproj" />
+    </ItemGroup>
+
+</Project>
