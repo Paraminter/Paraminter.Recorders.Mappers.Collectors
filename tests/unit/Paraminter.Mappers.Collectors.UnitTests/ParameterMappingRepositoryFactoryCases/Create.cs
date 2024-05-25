@@ -11,8 +11,6 @@ using Xunit;
 
 public sealed class Create
 {
-    private IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TArgumentData> Target<TParameter, TParameterRepresentation, TRecord, TArgumentData>(IParameterRepresentationFactory<TParameter, TParameterRepresentation> parameterRepresentationFactory, IEqualityComparer<TParameterRepresentation> parameterRepresentationComparer) => Fixture.Sut.Create<TParameter, TParameterRepresentation, TRecord, TArgumentData>(parameterRepresentationFactory, parameterRepresentationComparer);
-
     private readonly IFactoryFixture Fixture = FactoryFixtureFactory.Create();
 
     [Fact]
@@ -38,4 +36,6 @@ public sealed class Create
 
         Assert.NotNull(result);
     }
+
+    private IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TArgumentData> Target<TParameter, TParameterRepresentation, TRecord, TArgumentData>(IParameterRepresentationFactory<TParameter, TParameterRepresentation> parameterRepresentationFactory, IEqualityComparer<TParameterRepresentation> parameterRepresentationComparer) => Fixture.Sut.Create<TParameter, TParameterRepresentation, TRecord, TArgumentData>(parameterRepresentationFactory, parameterRepresentationComparer);
 }

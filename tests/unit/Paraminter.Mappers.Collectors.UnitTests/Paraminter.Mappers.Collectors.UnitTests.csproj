@@ -11,13 +11,12 @@
 
         <PackageReference Include="Moq" />
 
-        <PackageReference Include="Paraminter.Tests.Common" />
-
         <PackageReference Include="xunit" />
         <PackageReference Include="xunit.runner.visualstudio" />
 
         <ProjectReference Include="..\..\..\src\Paraminter.Mappers.Collectors.Abstractions\Paraminter.Mappers.Collectors.Abstractions.csproj" />
         <ProjectReference Include="..\..\..\src\Paraminter.Mappers.Collectors.Core\Paraminter.Mappers.Collectors.Core.csproj" />
+        <ProjectReference Include="..\..\..\src\Paraminter.Mappers.Collectors.DependencyInjection\Paraminter.Mappers.Collectors.DependencyInjection.csproj" />
         <ProjectReference Include="..\..\..\src\Paraminter.Mappers.Collectors\Paraminter.Mappers.Collectors.csproj" />
     </ItemGroup>
 
