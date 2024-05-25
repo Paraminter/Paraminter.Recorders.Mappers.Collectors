@@ -8,8 +8,6 @@ using Xunit;
 
 public sealed class Create
 {
-    private IParameterMapper<TParameter, TRecord, TArgumentData> Target<TParameter, TParameterRepresentation, TRecord, TArgumentData>(IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TArgumentData> parameterMappingRepository, IParameterMappingRegistrator<TParameterRepresentation, TRecord, TArgumentData> parameterMappingRegistrator) => Fixture.Sut.Create(parameterMappingRepository, parameterMappingRegistrator);
-
     private readonly IFactoryFixture Fixture = FactoryFixtureFactory.Create();
 
     [Fact]
@@ -40,4 +38,6 @@ public sealed class Create
 
         Assert.Same(mapper, result);
     }
+
+    private IParameterMapper<TParameter, TRecord, TArgumentData> Target<TParameter, TParameterRepresentation, TRecord, TArgumentData>(IParameterMappingRepository<TParameter, TParameterRepresentation, TRecord, TArgumentData> parameterMappingRepository, IParameterMappingRegistrator<TParameterRepresentation, TRecord, TArgumentData> parameterMappingRegistrator) => Fixture.Sut.Create(parameterMappingRepository, parameterMappingRegistrator);
 }
