@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+
+        <RootNamespace>Paraminter.Recorders.Mappers.Collectors</RootNamespace>
+
+        <Title>Paraminter.Recorders.Mappers.Collectors.Core</Title>
+        <Description>Defines the core components of Paraminter mapping-collectors.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Paraminter.Recorders.Mappers.Core" />
+    </ItemGroup>
+
+</Project>

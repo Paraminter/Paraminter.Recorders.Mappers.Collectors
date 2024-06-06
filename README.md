@@ -1,4 +1,4 @@
-# Paraminter.Mappers.Collectors
+# Paraminter.Recorders.Mappers.Collectors
 
 Adds mapping-collectors to `Paraminter`, allowing mappers to be incrementally created.
 

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+
+        <RootNamespace>Paraminter.Recorders.Mappers.Collectors</RootNamespace>
+
+        <Title>Paraminter.Recorders.Mappers.Collectors</Title>
+        <Description>Adds mapping-collectors to Paraminter.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Paraminter.Recorders.Mappers.Collectors.Abstractions\Paraminter.Recorders.Mappers.Collectors.Abstractions.csproj" />
+        <ProjectReference Include="..\Paraminter.Recorders.Mappers.Collectors.Core\Paraminter.Recorders.Mappers.Collectors.Core.csproj" />
+    </ItemGroup>
+
+</Project>
