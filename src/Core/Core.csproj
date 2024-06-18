@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageId>Paraminter.Recorders.Mappers.Collectors.Core</PackageId>
+        <Description>Defines the core components of Paraminter mapping-collectors.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Paraminter.Recorders.Mappers.Core" />
+    </ItemGroup>
+
+</Project>
