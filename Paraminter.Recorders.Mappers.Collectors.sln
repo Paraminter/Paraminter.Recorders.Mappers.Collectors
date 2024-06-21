@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyInjection", "Depe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net", "Net", "{AA7267C7-9398-4AC8-A1AC-E9A4150D5196}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT_Services", "tests\integration\DependencyInjection\Net\Services\IT_Services.csproj", "{8A6929AD-0908-4824-A0FA-A761932A378C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT_RecorderMapperCollectorServices", "tests\integration\DependencyInjection\Net\RecorderMapperCollectorServices\IT_RecorderMapperCollectorServices.csproj", "{8A6929AD-0908-4824-A0FA-A761932A378C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{83C932F4-45BB-42FB-BC52-54976449A6A7}"
 EndProject
@@ -49,7 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyInjection", "Depe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net", "Net", "{004C8081-E1A3-4C0C-851F-DEA2605490FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UT_Services", "tests\unit\DependencyInjection\Net\Services\UT_Services.csproj", "{52DF5E8C-A9EA-4AC7-BDBF-AE712080059E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UT_RecorderMapperCollectorServices", "tests\unit\DependencyInjection\Net\RecorderMapperCollectorServices\UT_RecorderMapperCollectorServices.csproj", "{52DF5E8C-A9EA-4AC7-BDBF-AE712080059E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,9 +101,6 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F3AB613A-0534-464B-BAB8-891711A1421B}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6114DCBD-72D1-41AC-A77C-27DF7D3F91C7} = {58436B08-D3F7-4199-B7B0-2E928EFECBC7}
 		{7FF8C3C4-86A2-4551-857A-BE46F50A7DFE} = {58436B08-D3F7-4199-B7B0-2E928EFECBC7}
@@ -122,5 +119,8 @@ Global
 		{669096A6-D726-4710-8ABC-C52942342D80} = {83C932F4-45BB-42FB-BC52-54976449A6A7}
 		{004C8081-E1A3-4C0C-851F-DEA2605490FE} = {669096A6-D726-4710-8ABC-C52942342D80}
 		{52DF5E8C-A9EA-4AC7-BDBF-AE712080059E} = {004C8081-E1A3-4C0C-851F-DEA2605490FE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3AB613A-0534-464B-BAB8-891711A1421B}
 	EndGlobalSection
 EndGlobal

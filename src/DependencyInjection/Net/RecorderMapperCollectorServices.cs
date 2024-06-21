@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 
 /// <summary>Allows the services provided by <i>Paraminter.Recorders.Mappers.Collectors</i> to be registered with a <see cref="IServiceCollection"/>.</summary>
-public static class Services
+public static class RecorderMapperCollectorServices
 {
     /// <summary>Registers the services provided by <i>Paraminter.Recorders.Mappers.Collectors</i> with the provided <see cref="IServiceCollection"/>.</summary>
     /// <param name="services">The <see cref="IServiceCollection"/> with which services are registered.</param>
