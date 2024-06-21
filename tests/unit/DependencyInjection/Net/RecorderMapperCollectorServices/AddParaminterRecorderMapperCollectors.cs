@@ -31,6 +31,6 @@ public sealed class AddParaminterRecorderMapperCollectors
     private static IServiceCollection Target(
         IServiceCollection services)
     {
-        return Services.AddParaminterRecorderMapperCollectors(services);
+        return RecorderMapperCollectorServices.AddParaminterRecorderMapperCollectors(services);
     }
 }
