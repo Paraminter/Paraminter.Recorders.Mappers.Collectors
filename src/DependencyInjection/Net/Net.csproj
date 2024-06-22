@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <AssemblyName>Paraminter.Recorders.Mappers.Collectors.DI.Net</AssemblyName>
+
         <PackageId>Paraminter.Recorders.Mappers.Collectors.DI.Net</PackageId>
         <Description>Allows the services provided by Paraminter.Recorders.Mappers.Collectors to be registered with .NET DI-containers.</Description>
     </PropertyGroup>

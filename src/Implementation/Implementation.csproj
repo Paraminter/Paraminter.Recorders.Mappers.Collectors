@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <AssemblyName>Paraminter.Recorders.Mappers.Collectors</AssemblyName>
+
         <PackageId>Paraminter.Recorders.Mappers.Collectors</PackageId>
         <Description>Adds mapping-collectors to Paraminter.</Description>
     </PropertyGroup>
