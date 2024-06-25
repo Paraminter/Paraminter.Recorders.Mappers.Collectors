@@ -4,7 +4,7 @@
         <AssemblyName>Paraminter.Recorders.Mappers.Collectors</AssemblyName>
 
         <PackageId>Paraminter.Recorders.Mappers.Collectors</PackageId>
-        <Description>Adds mapping-collectors to Paraminter.</Description>
+        <Description>Provides general implementations of services related to Paraminter mapping-collectors.</Description>
     </PropertyGroup>
 
     <ItemGroup>
